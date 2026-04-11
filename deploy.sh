@@ -10,7 +10,7 @@ git pull origin main
 
 # 2. Build and start containers
 echo ">>> Starting Docker containers..."
-docker-compose up -d --build
+docker compose up -d --build
 
 # 3. Wait for DB to be ready
 echo ">>> Waiting for database..."
@@ -18,22 +18,23 @@ sleep 15
 
 # 4. Install dependencies (inside container)
 echo ">>> Installing Composer dependencies..."
-docker-compose exec app composer install --no-dev --optimize-autoloader
+docker exec -it $(docker ps -q -f name=app) git config --global --add safe.directory /var/www
+docker compose exec app composer update --no-dev --optimize-autoloader
 
 # 5. Run Migrations
 echo ">>> Running Database Migrations..."
-docker-compose exec app php artisan migrate --force
+docker compose exec app php artisan migrate --force
 
 # 6. Optimize Laravel
 echo ">>> Optimizing Laravel..."
-docker-compose exec app php artisan optimize
-docker-compose exec app php artisan view:cache
-docker-compose exec app php artisan config:cache
-docker-compose exec app php artisan event:cache
+docker compose exec app php artisan optimize
+docker compose exec app php artisan view:cache
+docker compose exec app php artisan config:cache
+docker compose exec app php artisan event:cache
 
 # 7. Setup Storage and Link
 echo ">>> Setting up storage links..."
-docker-compose exec app php artisan storage:link
+docker compose exec app php artisan storage:link
 
 # 8. Setup MinIO Bucket (If first time)
 echo ">>> Ensuring MinIO bucket exists..."
