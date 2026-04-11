@@ -43,5 +43,5 @@ echo ">>> Ensuring MinIO bucket exists..."
 # For now, we assume the app handles bucket creation if missing or user creates it via console at :9001
 
 echo ">>> Deployment Complete!"
-echo ">>> Access the API at: https://$DOMAIN"
-echo ">>> Access MinIO Console at: http://$DOMAIN:9001"
+echo ">>> Access the API at: https://almoq3.com"
+echo ">>> Access MinIO Console at: http://almoq3.com:9001"
