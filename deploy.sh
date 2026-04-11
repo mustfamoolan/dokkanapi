@@ -17,8 +17,9 @@ echo ">>> Waiting for database..."
 sleep 15
 
 # 4. Install dependencies (inside container)
+echo ">>> Fixing permissions..."
+docker compose exec --user root app chown -R www-data:www-data /var/www
 echo ">>> Installing Composer dependencies..."
-docker exec -it $(docker ps -q -f name=app) git config --global --add safe.directory /var/www
 docker compose exec app composer update --no-dev --optimize-autoloader
 
 # 5. Run Migrations
