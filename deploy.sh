@@ -19,8 +19,13 @@ sleep 15
 # 4. Install dependencies (inside container)
 echo ">>> Fixing permissions..."
 docker compose exec --user root app chown -R www-data:www-data /var/www
-echo ">>> Installing Composer dependencies..."
-docker compose exec app composer update --no-dev --optimize-autoloader
+# Install PHP dependencies
+docker compose exec app composer install --no-interaction --optimize-autoloader
+
+# Install JS dependencies and Build Assets (Vite)
+echo "Building assets..."
+docker compose exec app npm install
+docker compose exec app npm run build
 
 # 5. Run Migrations
 echo ">>> Running Database Migrations..."

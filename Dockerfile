@@ -12,7 +12,9 @@ RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
     mysql-client \
-    linux-headers
+    linux-headers \
+    nodejs \
+    npm
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl zip opcache
