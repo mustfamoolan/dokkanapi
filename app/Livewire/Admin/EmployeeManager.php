@@ -14,7 +14,7 @@ class EmployeeManager extends Component
 
     public $search = '';
 
-    #[Layout('layouts.admin')]
+    #[Layout('components.admin-layout')]
     #[Title('إدارة الموظفين - Dokkan')]
     public function render()
     {

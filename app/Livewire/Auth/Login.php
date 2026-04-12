@@ -18,7 +18,7 @@ class Login extends Component
         'password' => 'required',
     ];
 
-    #[Layout('layouts.guest')]
+    #[Layout('components.guest-layout')]
     #[Title('Login - Dokkan Admin')]
     public function render()
     {
