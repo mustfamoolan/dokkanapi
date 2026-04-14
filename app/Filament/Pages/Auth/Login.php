@@ -15,7 +15,7 @@ class Login extends BaseLogin
             'form' => $this->form(
                 $this->makeForm()
                     ->schema([
-                        $this->getPhoneFormComponent(),
+                        $this->getEmailFormComponent()->label('رقم الهاتف')->tel()->autocomplete('tel'),
                         $this->getPasswordFormComponent(),
                         $this->getRememberFormComponent(),
                     ])
@@ -24,21 +24,10 @@ class Login extends BaseLogin
         ];
     }
 
-    protected function getPhoneFormComponent(): Component
-    {
-        return TextInput::make('phone')
-            ->label(__('رقم الهاتف'))
-            ->required()
-            ->autocomplete()
-            ->autofocus()
-            ->extraInputAttributes(['tabindex' => 1]);
-    }
-
-    // Overriding the default getCredentialsFromFormData to use phone
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
-            'phone' => $data['phone'],
+            'phone' => $data['email'], // سنستخدم حقل الإيميل داخلياً ولكنه سيحمل قيمة الهاتف
             'password' => $data['password'],
         ];
     }
