@@ -13,9 +13,9 @@ use Filament\Schemas\Schema;
 
 class Login extends BaseLogin
 {
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 TextInput::make('phone')
                     ->label('رقم الهاتف')
