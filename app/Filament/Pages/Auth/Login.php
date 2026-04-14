@@ -7,20 +7,32 @@ use Filament\Forms\Components\TextInput;
 use Filament\Auth\Pages\Login as BaseLogin;
 use Illuminate\Validation\ValidationException;
 
+use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
 class Login extends BaseLogin
 {
-    protected function getEmailFormComponent(): Component
+    public function form(Form $form): Form
     {
-        return parent::getEmailFormComponent()
-            ->label('رقم الهاتف')
-            ->tel()
-            ->autocomplete('tel');
+        return $form
+            ->schema([
+                TextInput::make('phone')
+                    ->label('رقم الهاتف')
+                    ->tel()
+                    ->required()
+                    ->autocomplete('tel')
+                    ->autofocus(),
+                $this->getPasswordFormComponent(),
+                $this->getRememberFormComponent(),
+            ])
+            ->statePath('data');
     }
 
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
-            'phone' => $data['email'],
+            'phone' => $data['phone'],
             'password' => $data['password'],
         ];
     }
