@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -16,17 +16,17 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|null $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static string|null $navigationLabel = 'الموظفين';
+    protected static ?string $navigationLabel = 'الموظفين';
 
-    protected static string|null $modelLabel = 'موظف';
+    protected static ?string $modelLabel = 'موظف';
 
-    protected static string|null $pluralModelLabel = 'الموظفين';
+    protected static ?string $pluralModelLabel = 'الموظفين';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\Section::make('معلومات الموظف')
                     ->schema([
@@ -56,9 +56,9 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('password')
                             ->label('كلمة المرور')
                             ->password()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->required(fn (string $context): bool => $context === 'create')
+                            ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                            ->dehydrated(fn($state) => filled($state))
+                            ->required(fn(string $context): bool => $context === 'create')
                             ->maxLength(255),
                     ])->columns(2),
             ]);
@@ -87,7 +87,7 @@ class UserResource extends Resource
                         'success' => 'active',
                         'danger' => 'suspended',
                     ])
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'active' => 'نشط',
                         'suspended' => 'معلق',
                     }),
