@@ -12,7 +12,7 @@ class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
 
-    protected static string | \Filament\Support\Contracts\IconIdentifier | \Illuminate\Contracts\Support\Htmlable | null $navigationIcon = 'heroicon-o-key';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-key';
 
     protected static ?string $modelLabel = 'صلاحية';
 

@@ -12,7 +12,7 @@ class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
-    protected static string | \Filament\Support\Contracts\IconIdentifier | \Illuminate\Contracts\Support\Htmlable | null $navigationIcon = 'heroicon-o-shield-check';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-shield-check';
 
     protected static ?string $modelLabel = 'دور';
 

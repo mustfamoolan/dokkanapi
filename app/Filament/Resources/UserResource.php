@@ -21,7 +21,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string | \Filament\Support\Contracts\IconIdentifier | \Illuminate\Contracts\Support\Htmlable | null $navigationIcon = 'heroicon-o-users';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationLabel = 'الموظفين';
 
