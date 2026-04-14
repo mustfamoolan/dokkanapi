@@ -64,9 +64,9 @@ class UserResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Schema $schema): Schema
     {
-        return $table
+        return $schema
             ->columns([
                 Tables\Columns\TextColumn::make('employee_id')
                     ->label('ID')
