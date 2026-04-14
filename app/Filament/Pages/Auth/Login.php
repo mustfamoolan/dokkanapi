@@ -34,18 +34,12 @@ class Login extends BaseLogin
             ->extraInputAttributes(['tabindex' => 1]);
     }
 
+    // Overriding the default getCredentialsFromFormData to use phone
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
             'phone' => $data['phone'],
             'password' => $data['password'],
         ];
-    }
-
-    protected function throwFailureValidationException(): never
-    {
-        throw ValidationException::withMessages([
-            'data.phone' => __('auth.failed'),
-        ]);
     }
 }
