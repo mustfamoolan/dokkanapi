@@ -8,7 +8,6 @@ use Filament\Auth\Pages\Login as BaseLogin;
 use Illuminate\Validation\ValidationException;
 
 use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class Login extends BaseLogin
