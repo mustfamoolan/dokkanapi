@@ -41,20 +41,20 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('employee_id')
+                \Filament\Tables\Columns\TextColumn::make('employee_id')
                     ->label('ID')
                     ->searchable()
                     ->sortable()
                     ->fontFamily('mono')
                     ->weight('bold'),
-                Tables\Columns\TextColumn::make('name')
+                \Filament\Tables\Columns\TextColumn::make('name')
                     ->label('الاسـم')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('phone')
+                \Filament\Tables\Columns\TextColumn::make('phone')
                     ->label('رقم الهاتف')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('status')
+                \Filament\Tables\Columns\TextColumn::make('status')
                     ->label('الـحالة')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -66,14 +66,14 @@ class UserResource extends Resource
                         'active' => 'نشط',
                         'suspended' => 'معلق',
                     }),
-                Tables\Columns\TextColumn::make('created_at')
+                \Filament\Tables\Columns\TextColumn::make('created_at')
                     ->label('تاريخ الانضمام')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('status')
+                \Filament\Tables\Filters\SelectFilter::make('status')
                     ->label('تصفية حسب الحالة')
                     ->options([
                         'active' => 'نشط',
@@ -81,12 +81,12 @@ class UserResource extends Resource
                     ]),
             ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                \Filament\Actions\BulkActionGroup::make([
+                    \Filament\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
