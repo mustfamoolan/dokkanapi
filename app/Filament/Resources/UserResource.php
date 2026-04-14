@@ -33,24 +33,24 @@ class UserResource extends Resource
     {
         return $schema
             ->schema([
-                Section::make('معلومات الموظف')
+                \Filament\Schemas\Components\Section::make('معلومات الموظف')
                     ->schema([
-                        TextInput::make('name')
+                        \Filament\Forms\Components\TextInput::make('name')
                             ->label('الاسـم الكامل')
                             ->required()
                             ->maxLength(255),
-                        TextInput::make('phone')
+                        \Filament\Forms\Components\TextInput::make('phone')
                             ->label('رقم الهاتف')
                             ->tel()
                             ->required()
                             ->maxLength(20)
                             ->unique(ignoreRecord: true),
-                        TextInput::make('employee_id')
+                        \Filament\Forms\Components\TextInput::make('employee_id')
                             ->label('معرف الـموظف (ID)')
                             ->placeholder('سيتم توليده تلقائياً')
                             ->disabled()
                             ->dehydrated(false),
-                        Select::make('status')
+                        \Filament\Forms\Components\Select::make('status')
                             ->label('الـحالة')
                             ->options([
                                 'active' => 'نشط',
@@ -58,7 +58,7 @@ class UserResource extends Resource
                             ])
                             ->required()
                             ->default('active'),
-                        TextInput::make('password')
+                        \Filament\Forms\Components\TextInput::make('password')
                             ->label('كلمة المرور')
                             ->password()
                             ->dehydrateStateUsing(fn($state) => Hash::make($state))
