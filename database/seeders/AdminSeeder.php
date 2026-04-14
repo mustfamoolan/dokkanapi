@@ -14,14 +14,34 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create Roles
+        // 1. Create Core Permissions
+        $permissions = [
+            'access_admin',
+            'view_users',
+            'create_users',
+            'edit_users',
+            'delete_users',
+            'view_roles',
+            'create_roles',
+            'edit_roles',
+            'delete_roles',
+        ];
+
+        foreach ($permissions as $permission) {
+            \Spatie\Permission\Models\Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // 2. Create Roles
         $superAdmin = Role::firstOrCreate(['name' => 'Super Admin']);
         $manager = Role::firstOrCreate(['name' => 'Manager']);
-        $support = Role::firstOrCreate(['name' => 'Support']);
+        $viewer = Role::firstOrCreate(['name' => 'Viewer']);
 
-        // 2. Create the first Super Admin
+        // Assign all permissions to Super Admin (though BasePolicy bypasses this, it's good for DB logic)
+        $superAdmin->syncPermissions(\Spatie\Permission\Models\Permission::all());
+
+        // 3. Create the first Super Admin
         $admin = User::firstOrCreate(
-            ['phone' => '07742209251'], // الرقم الافتراضي للبدء
+            ['phone' => '07742209251'],
             [
                 'name' => 'المدير العام',
                 'employee_id' => 'a1',
@@ -32,9 +52,6 @@ class AdminSeeder extends Seeder
 
         $admin->assignRole($superAdmin);
 
-        $this->command->info('تم إنشاء المدير الأول بنجاح!');
-        $this->command->info('الهاتف: 07742209251');
-        $this->command->info('المعرف: a1');
-        $this->command->info('كلمة المرور: 12345678');
+        $this->command->info('تم إنشاء نظام الصلاحيات والمدير الأول بنجاح!');
     }
 }

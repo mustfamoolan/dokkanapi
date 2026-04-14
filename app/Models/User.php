@@ -15,7 +15,11 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true; // في البداية سنسمح للكل، ويمكن لاحقاً تقييدها بالأدوار (Roles)
+        if ($this->status !== 'active') {
+            return false;
+        }
+
+        return $this->hasRole('Super Admin') || $this->hasPermissionTo('access_admin');
     }
 
     /**
