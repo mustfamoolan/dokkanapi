@@ -81,12 +81,14 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->label('رقم الهاتف')
                     ->searchable(),
-                Tables\Columns\BadgeColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label('الـحالة')
-                    ->colors([
-                        'success' => 'active',
-                        'danger' => 'suspended',
-                    ])
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'active' => 'success',
+                        'suspended' => 'danger',
+                        default => 'gray',
+                    })
                     ->formatStateUsing(fn(string $state): string => match ($state) {
                         'active' => 'نشط',
                         'suspended' => 'معلق',
