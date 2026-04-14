@@ -50,6 +50,12 @@ class UserResource extends Resource
                             ->placeholder('سيتم توليده تلقائياً')
                             ->disabled()
                             ->dehydrated(false),
+                        \Filament\Forms\Components\Select::make('roles')
+                            ->label('الصلاحيات / الأدوار')
+                            ->multiple()
+                            ->relationship('roles', 'name')
+                            ->preload()
+                            ->required(),
                         \Filament\Forms\Components\Select::make('status')
                             ->label('الـحالة')
                             ->options([
