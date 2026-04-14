@@ -9,6 +9,9 @@ use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,24 +35,24 @@ class UserResource extends Resource
     {
         return $schema
             ->schema([
-                Forms\Components\Section::make('معلومات الموظف')
+                Section::make('معلومات الموظف')
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('الاسـم الكامل')
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('phone')
+                        TextInput::make('phone')
                             ->label('رقم الهاتف')
                             ->tel()
                             ->required()
                             ->maxLength(20)
                             ->unique(ignoreRecord: true),
-                        Forms\Components\TextInput::make('employee_id')
+                        TextInput::make('employee_id')
                             ->label('معرف الـموظف (ID)')
                             ->placeholder('سيتم توليده تلقائياً')
                             ->disabled()
                             ->dehydrated(false),
-                        Forms\Components\Select::make('status')
+                        Select::make('status')
                             ->label('الـحالة')
                             ->options([
                                 'active' => 'نشط',
@@ -57,7 +60,7 @@ class UserResource extends Resource
                             ])
                             ->required()
                             ->default('active'),
-                        Forms\Components\TextInput::make('password')
+                        TextInput::make('password')
                             ->label('كلمة المرور')
                             ->password()
                             ->dehydrateStateUsing(fn($state) => Hash::make($state))
