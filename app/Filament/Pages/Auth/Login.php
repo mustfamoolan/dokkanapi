@@ -9,25 +9,18 @@ use Illuminate\Validation\ValidationException;
 
 class Login extends BaseLogin
 {
-    protected function getForms(): array
+    protected function getEmailFormComponent(): Component
     {
-        return [
-            'form' => $this->form(
-                $this->makeForm()
-                    ->schema([
-                        $this->getEmailFormComponent()->label('رقم الهاتف')->tel()->autocomplete('tel'),
-                        $this->getPasswordFormComponent(),
-                        $this->getRememberFormComponent(),
-                    ])
-                    ->statePath('data'),
-            ),
-        ];
+        return parent::getEmailFormComponent()
+            ->label('رقم الهاتف')
+            ->tel()
+            ->autocomplete('tel');
     }
 
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
-            'phone' => $data['email'], // سنستخدم حقل الإيميل داخلياً ولكنه سيحمل قيمة الهاتف
+            'phone' => $data['email'],
             'password' => $data['password'],
         ];
     }
