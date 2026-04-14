@@ -33,7 +33,7 @@ class UserResource extends Resource
     {
         return $schema
             ->schema([
-                \Filament\Schemas\Components\Section::make('معلومات الموظف')
+                \Filament\Schemas\Components\Fieldset::make('معلومات الموظف')
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('name')
                             ->label('الاسـم الكامل')
