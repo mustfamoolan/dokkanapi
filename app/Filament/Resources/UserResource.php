@@ -33,39 +33,7 @@ class UserResource extends Resource
     {
         return $schema
             ->schema([
-                \Filament\Schemas\Components\Fieldset::make('معلومات الموظف')
-                    ->schema([
-                        \Filament\Forms\Components\TextInput::make('name')
-                            ->label('الاسـم الكامل')
-                            ->required()
-                            ->maxLength(255),
-                        \Filament\Forms\Components\TextInput::make('phone')
-                            ->label('رقم الهاتف')
-                            ->tel()
-                            ->required()
-                            ->maxLength(20)
-                            ->unique(ignoreRecord: true),
-                        \Filament\Forms\Components\TextInput::make('employee_id')
-                            ->label('معرف الـموظف (ID)')
-                            ->placeholder('سيتم توليده تلقائياً')
-                            ->disabled()
-                            ->dehydrated(false),
-                        \Filament\Forms\Components\Select::make('status')
-                            ->label('الـحالة')
-                            ->options([
-                                'active' => 'نشط',
-                                'suspended' => 'معلق',
-                            ])
-                            ->required()
-                            ->default('active'),
-                        \Filament\Forms\Components\TextInput::make('password')
-                            ->label('كلمة المرور')
-                            ->password()
-                            ->dehydrateStateUsing(fn($state) => Hash::make($state))
-                            ->dehydrated(fn($state) => filled($state))
-                            ->required(fn(string $context): bool => $context === 'create')
-                            ->maxLength(255),
-                    ])->columns(2),
+                // Empty for diagnostic purposes
             ]);
     }
 
