@@ -12,13 +12,13 @@ class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static string | \Filament\Support\Contracts\IconIdentifier | \Illuminate\Contracts\Support\Htmlable | null $navigationIcon = 'heroicon-o-shield-check';
 
     protected static ?string $modelLabel = 'دور';
 
     protected static ?string $pluralModelLabel = 'الأدوار والصلاحيات';
 
-    protected static ?string $navigationGroup = 'الإعدادات المتقدمة';
+    protected static string | \UnitEnum | null $navigationGroup = 'الإعدادات المتقدمة';
 
     public static function form(Schema $schema): Schema
     {

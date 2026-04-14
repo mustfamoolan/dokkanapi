@@ -12,13 +12,13 @@ class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-key';
+    protected static string | \Filament\Support\Contracts\IconIdentifier | \Illuminate\Contracts\Support\Htmlable | null $navigationIcon = 'heroicon-o-key';
 
     protected static ?string $modelLabel = 'صلاحية';
 
     protected static ?string $pluralModelLabel = 'قائمة الصلاحيات';
 
-    protected static ?string $navigationGroup = 'الإعدادات المتقدمة';
+    protected static string | \UnitEnum | null $navigationGroup = 'الإعدادات المتقدمة';
 
     public static function form(Schema $schema): Schema
     {
